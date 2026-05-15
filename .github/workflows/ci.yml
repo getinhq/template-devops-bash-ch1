@@ -5,9 +5,16 @@ on:
   push:
     branches: [main]
 jobs:
-  shellcheck:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y shellcheck
       - run: shellcheck backup.sh
+      - name: Smoke test backup
+        run: |
+          set -e
+          mkdir -p /tmp/src && echo hi > /tmp/src/file.txt
+          chmod +x backup.sh
+          ./backup.sh /tmp/src
+          test -n "$(ls -A backups 2>/dev/null || true)"

@@ -1,9 +1,20 @@
 # Timestamped backup script
 
-Write `backup.sh` that backs up a directory to a timestamped archive (tar.gz).
+## Task
+Write a Bash script that backs up a directory to a timestamped archive (e.g. `backups/source-YYYYMMDD-HHMMSS.tar.gz`).
 
-## Usage
-`./backup.sh /path/to/source`
+## Starter (not finished)
+`backup.sh` exits with an error until you implement the logic. CI runs **shellcheck** and a smoke test that expects a successful backup.
 
-## CI
-shellcheck runs on `backup.sh`.
+## Your work
+- Implement `backup.sh` to accept a source directory argument.
+- Create the `backups/` directory if needed.
+- Use `tar` (or similar) with a timestamp in the archive name.
+- Test: `./backup.sh /path/to/folder`
+
+## Verify
+```bash
+shellcheck backup.sh
+./backup.sh /tmp/mytest
+ls backups/
+```
